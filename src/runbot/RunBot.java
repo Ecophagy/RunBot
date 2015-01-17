@@ -6,9 +6,10 @@ import org.pircbotx.PircBotX;
 public class RunBot{
 
     public static void main(String[] args) throws Exception {
+
             //Configure what we want our bot to do
             Configuration configuration = new Configuration.Builder()
-                            .setName("RuNBot") //Set the nick of the bot. CHANGE IN YOUR CODE
+                            .setName("RunBot") //Set the nick of the bot. CHANGE IN YOUR CODE
                             .setServerHostname("irc.quakenet.org") //Join the freenode network
                             .addAutoJoinChannel("#run") //Join the official #pircbotx channel
                             .addListener(new MyListener()) //Add our listener that will be called on Events

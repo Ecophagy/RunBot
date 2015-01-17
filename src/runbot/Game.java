@@ -5,7 +5,6 @@
 package runbot;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  *
@@ -14,13 +13,15 @@ import java.util.List;
 public abstract class Game {
     public Date date;
     public String opponent;
-    public List maps;
+    public String map1;
+    public String map2;
     
-    private Game(){}; //Default Constructor
+    public Game(){}; //Default Constructor
     
-    public Game(Date date, String opponent, List maps){
+    public Game(Date date, String opponent, String map1, String map2){
        this.date = date; 
        this.opponent = opponent;
-       this.maps = maps;
+       this.map1 = map1;
+       this.map2 = map2;
     }
 }
