@@ -4,6 +4,7 @@
  */
 package runbot;
 
+import java.util.Date;
 import runbot.Constants.League;
 
 /**
@@ -12,10 +13,14 @@ import runbot.Constants.League;
  */
 public class Match extends Game {
     
-    public String matchpage; //HTTP object?
+    public String matchpage;
     public League league;
     public int week;
     
-    public Match(){};
-    
+    public Match(Date date, String opponent, String map1, String map2, String matchpage, League league, int week){
+        super(date, opponent, map1, map2);
+        this.matchpage = matchpage;
+        this.league = league;
+        this.week = week;
+    }
 }

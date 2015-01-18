@@ -15,11 +15,12 @@ import java.util.List;
  */
 public class DbConnector {
     
+
     public Connection connect(){
         Connection c = null;
         try{
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            c = DriverManager.getConnection("jdbc:sqlite:games.db");
         }
         catch(Exception e){
             System.err.println( e.getClass().getName() + ": " + e.getMessage());
@@ -47,7 +48,7 @@ public class DbConnector {
         }
     }
     
-    public void createTable(){
+    public void createScrimTable(){
         try{
             Connection c = connect();
             Statement stmt = c.createStatement();
@@ -68,10 +69,37 @@ public class DbConnector {
         }
     }
     
+        public void createMatchTable(){
+        try{
+            Connection c = connect();
+            Statement stmt = c.createStatement();
+            
+            String sql = "CREATE TABLE MATCH" + 
+                        "(ID INT PRIMARY KEY NOT NULL, " +
+                        "DATE TEXT          NOT NULL, "  +
+                        "OPPONENT TEXT, "                +
+                        "MAP1 TEXT NOT NULL, "           +
+                        "MAP2 TEXT, "                    +
+                        "LEAGUE TEXT        NOT NULL, "  +
+                        "WEEK INT           NOT NULL, "  +
+                        "MATCHPAGE TEXT)";
+
+                    
+            stmt.executeUpdate(sql);
+            stmt.close();
+            c.close();
+        }
+        catch(Exception e){
+            System.err.println( e.getClass().getName() + ": " + e.getMessage());
+        }
+    }
+    
+    
     public Scrim listScrims(){
         Scrim scrim = null;
         try{
-            createTable();
+            createScrimTable();
+            createMatchTable();
             insertTestEntry();
             
             Connection c = connect();
