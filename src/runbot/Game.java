@@ -11,15 +11,17 @@ import java.util.Date;
  * @author Oliver
  */
 public abstract class Game {
-    public Date date;
+    public String time;
+    public String date;
     public String opponent;
     public String map1;
     public String map2;
     
     public Game(){}; //Default Constructor
     
-    public Game(Date date, String opponent, String map1, String map2){
+    public Game(String date, String time, String opponent, String map1, String map2){
        this.date = date; 
+       this.time = time;
        this.opponent = opponent;
        this.map1 = map1;
        this.map2 = map2;

@@ -19,10 +19,17 @@ public class MyListener extends ListenerAdapter {
                 //When someone says hello, respond with Hello World
                 if (event.getMessage().startsWith("?helloworld"))
                         event.respond("Hello world!");
+                else if(event.getMessage().startsWith("!nextscrim")){
+                    DbConnector dbc = new DbConnector();
+                    //TODO: Make "next scrim" function in DbConnector
+                }
                 else if(event.getMessage().startsWith("!scrims")){
                     DbConnector dbc = new DbConnector();
                     Scrim scrims = dbc.listScrims();
-                    event.respond(scrims.date.toString());
+                    event.respond("Date: " + scrims.date);
+                    event.respond("Time: " + scrims.time + "CET" );
+                    event.respond("Opponent: " + scrims.opponent);
+                    event.respond("Maps: " + scrims.map1 + " & " + scrims.map2);
                 }
         }
 }
