@@ -4,6 +4,7 @@
  */
 package runbot;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import org.pircbotx.hooks.ListenerAdapter;
@@ -26,8 +27,9 @@ public class MyListener extends ListenerAdapter {
                 else if(event.getMessage().startsWith("!scrims")){
                     DbConnector dbc = new DbConnector();
                     Scrim scrims = dbc.listScrims();
-                    event.respond("Date: " + scrims.date);
-                    event.respond("Time: " + scrims.time + "CET" );
+                    SimpleDateFormat format = new SimpleDateFormat("H:m d/MM/yyyy");
+                    String date =  format.format(scrims.DateandTime);
+                    event.respond("Date: " + date);
                     event.respond("Opponent: " + scrims.opponent);
                     event.respond("Maps: " + scrims.map1 + " & " + scrims.map2);
                 }

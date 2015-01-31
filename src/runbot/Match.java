@@ -17,8 +17,8 @@ public class Match extends Game {
     public League league;
     public int week;
     
-    public Match(String date, String time, String opponent, String map1, String map2, String matchpage, League league, int week){
-        super(date, time, opponent, map1, map2);
+    public Match(Date DateandTime, String opponent, String map1, String map2, String matchpage, League league, int week){
+        super(DateandTime, opponent, map1, map2);
         this.matchpage = matchpage;
         this.league = league;
         this.week = week;

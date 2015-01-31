@@ -4,6 +4,7 @@
  */
 package runbot;
 
+import java.util.Date;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,8 +36,8 @@ public class DbConnector {
             Statement stmt = c.createStatement();
             c.setAutoCommit(false);
 
-            String sql = "INSERT INTO SCRIM (DATE, TIME, OPPONENT, MAP1, MAP2) " + 
-                        "VALUES ('12/01', '17:00', 'Test team', 'cp_process', 'pl_upward');";
+            String sql = "INSERT INTO SCRIM (DATE, OPPONENT, MAP1, MAP2) " + 
+                        "VALUES ('1422718197000', 'Test team', 'cp_process', 'pl_upward');";
 
             stmt.executeUpdate(sql);
             stmt.close();
@@ -55,8 +56,7 @@ public class DbConnector {
             
             String sql = "CREATE TABLE SCRIM" + 
                         "(ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        "DATE TEXT          NOT NULL, "  +
-                        "TIME TEXT      NOT NULL, "      +
+                        "DATE INTEGER          NOT NULL, "  +
                         "OPPONENT TEXT, "                +
                         "MAP1 TEXT, "                   +
                         "MAP2 TEXT)";
@@ -77,8 +77,7 @@ public class DbConnector {
             
             String sql = "CREATE TABLE MATCH" + 
                         "(ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        "DATE TEXT          NOT NULL, "  +
-                        "TIME TEXT      NOT NULL, "      +
+                        "DATE INTEGER          NOT NULL, "  +
                         "OPPONENT TEXT, "                +
                         "MAP1 TEXT NOT NULL, "           +
                         "MAP2 TEXT, "                    +
@@ -109,15 +108,12 @@ public class DbConnector {
             Statement stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM SCRIM;");
             while (rs.next()){
-                String date = rs.getString("date");
-                String time = rs.getString("time");
-              //  SimpleDateFormat format = new SimpleDateFormat("d MM, H");
-              //  java.util.Date date = format.parse(rawdate);
+                Date date = new Date(rs.getLong("date"));            
                 String opponent = rs.getString("opponent");
                 String map1 = rs.getString("map1");
                 String map2 = rs.getString("map2");
                 
-                scrim = new Scrim(date, time, opponent, map1, map2);
+                scrim = new Scrim(date, opponent, map1, map2);
             }
             rs.close();
             stmt.close();
